@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  lm-frontend-app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: lm-frontend-app
+    working_dir: /var/www/html
+    volumes:
+      - ./html:/var/www/html
+    networks:
+      - lm-monorepo-net
+
+  lm-frontend-nginx:
+    image: nginx:stable
+    container_name: lm-frontend-nginx
+    ports:
+      - "8020:80"
+    volumes:
+      - ./html:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - lm-frontend-app
+    networks:
+      - lm-monorepo-net
+
+networks:
+  lm-monorepo-net:
+    external: true
