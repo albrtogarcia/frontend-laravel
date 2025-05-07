@@ -1,4 +1,5 @@
 <div class="counter">
+    <p class="text-[#706f6c] dark:text-[#A1A09A]">Livewire test:</p>
     <button wire:click="increment">Add +1</button>
     <div>{{ $count }}</div>
 
@@ -7,6 +8,7 @@
             display: flex;
             align-items: center;
             margin-block: 2rem;
+            gap: 1rem;
 
             div {
                 margin-left: 10px;
